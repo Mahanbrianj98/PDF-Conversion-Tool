@@ -1,0 +1,33 @@
+Ideas to improve project.
+- Dynamic User Inputs:- Add user-configurable options for number patterns, crop ratios, or OCR language via a pop-up window or command-line arguments.
+
+- Error Recovery:- Skip problematic pages instead of halting the process and log skipped pages for later review.
+
+- Image Preprocessing for OCR:- Improve OCR accuracy with preprocessing steps:- Grayscale conversion
+- Thresholding (binarization)
+- Noise removal
+
+- Use OpenCV or PIL for these enhancements.
+
+- Parallelize OCR for Images:- Process multiple images from a single PDF page concurrently to optimize performance.
+
+- Detailed Reporting:- Generate a summary report at the end, detailing:- Total pages processed
+- Successfully processed pages
+- Skipped pages (with logged reasons).
+
+
+- Enhanced Progress Tracking:- Show percentage completion or estimated time remaining on the progress bar for better feedback.
+
+- Expand File Compatibility:- Extend support to other file formats such as DOCX, PPTX, or various image formats.
+
+- Output Folder Organization:- Group output files into subdirectories based on criteria (e.g., page numbers or series of numbers).
+
+- Code Modularization:- Refactor the script into reusable modules or classes for better readability, debugging, and scalability.
+
+- Cross-Platform Compatibility:- Ensure compatibility across operating systems (Windows, Linux, macOS) by adapting path handling and dependencies.
+
+- Multithreading for Large PDFs:- Test the multithreading implementation for large PDF files to ensure proper thread synchronization and memory efficiency.
+
+
+
+
