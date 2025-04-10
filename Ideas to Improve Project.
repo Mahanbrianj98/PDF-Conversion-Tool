@@ -26,8 +26,31 @@ Ideas to improve project.
 
 - Cross-Platform Compatibility:- Ensure compatibility across operating systems (Windows, Linux, macOS) by adapting path handling and dependencies.
 
-- Multithreading for Large PDFs:- Test the multithreading implementation for large PDF files to ensure proper thread synchronization and memory efficiency.
+- Multithreading for Large PDFs:
+  - Test the multithreading implementation for large PDF files to ensure proper thread synchronization and memory efficiency.
 
+- Error alerts:
+  - Display detailed error messages for specific failures like file read/write errors or missing files, 
+  - Add error alert pop-ups using tkinter's messagebox.
+
+- GPU Utilization:
+  - Replace some image processing tasks with OpenCV and enable GPU acceleration.
+  - Use libraries like cuDNN and CUDA (if supported on the system) for Tesseract OCR or image enhancement.
+
+- Interactive Crop Preview:
+  - Use a GUI library like tkinter or PyQt to display the page/image.
+  - Let users manually adjust the crop region with draggable boxes before applying changes.
+  - Preview the cropped area and allow user confirmation
+
+Batch Processing with Specified Output Folders:
+  - Allow users to select a folder containing multiple PDF files.
+  - For each PDF, prompt users to specify a unique output folder.
+  - Use tkinter's askdirectory() within a loop to handle folder selection for each file
+
+Develop a Python program that allows a user to visually select an area of a sample PDF page using a graphical user interface. 
+The selected area will act as a pattern for recognizing pages containing similar elements (e.g., a company logo or header) across the PDF file. 
+Pages will be grouped by detected patterns and saved into separate folders, 
+with multithreading for performance and error alerts for misclassified pages.
 
 
 
