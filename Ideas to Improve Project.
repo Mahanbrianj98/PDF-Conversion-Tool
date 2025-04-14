@@ -52,5 +52,59 @@ The selected area will act as a pattern for recognizing pages containing similar
 Pages will be grouped by detected patterns and saved into separate folders, 
 with multithreading for performance and error alerts for misclassified pages.
 
+Optimize OCR Processing
+Use Lower DPI for Images: OCR can be faster if you use lower DPI (dots per inch) when converting PDF pages into images. For example, instead of 300 DPI, try 150 DPI unless higher quality is absolutely necessary:
+images = convert_from_path(pdf_path, dpi=150, first_page=page_number + 1, last_page=page_number + 1)
+Pre-trained Models: Explore more optimized OCR libraries or tweak Tesseract settings for faster processing (e.g., pytesseract allows options like oem to specify the engine mode).
+
+Use Multiprocessing More Effectively
+Your current implementation uses multiprocessing, but you can push it further:
+- Batch Processing: Process multiple pages simultaneously by partitioning tasks into smaller batches. This reduces overhead caused by managing individual tasks.
+- Fine-Tune CPU Usage: Explicitly control the number of processes (Pool(processes=cpu_count())), experimenting with slightly fewer processes than the total CPU count to avoid saturation.
+
+
+3. Optimize Image Cropping and Saving
+- Avoid Repeated Cropping: If the cropping ratio is constant, calculate the crop dimensions once and reuse them for every image:
+crop_box = (0, 0, int(img_width * crop_ratio), int(img_height * crop_ratio))
+
+- Save in Parallel: Image saving operations can be offloaded to a separate thread or pool to reduce blocking during OCR.
+
+
+4. Improve Text Extraction Logic
+- Leverage PDF Metadata: If PDFs contain embedded text layers, 
+prioritize text extraction using PyMuPDF without converting pages to images for OCR. 
+This bypasses OCR entirely when embedded text is available:
+text = page.get_text("text")
+
+
+
+5. Reduce File I/O Overhead
+- In-Memory Operations: Instead of writing files frequently to disk, hold intermediate results (e.g., cropped images or extracted text) in memory and write final outputs to disk in a single operation.
+
+
+6. Experiment with Alternative Libraries
+Some libraries are faster or more specialized:
+- PyPDF2 for faster extraction of text from PDFs with embedded text layers.
+- pdfplumber for more accurate text extraction, though it may not always be faster.
+
+
+7. Cache Results
+If certain PDFs or pages are processed frequently, implement caching mechanisms to store results for reuse. For example, use a lightweight database like SQLite or Redis.
+
+8. Analyze Bottlenecks
+Use profiling tools (cProfile or line_profiler) to identify the slowest parts of the program. This helps focus optimization efforts on the actual bottlenecks.
+
+9. Use GPU Acceleration
+For OCR-heavy tasks, libraries like OpenCV with GPU acceleration can process images faster. You may need compatible hardware and drivers.
+
+Practical Steps
+Start by identifying where the most time is spent—whether it's OCR, image processing, or file I/O—and apply optimizations incrementally to avoid introducing bugs. Let me know which direction you'd like to explore, and I can help implement it! 🚀
+
+
+
+
+
+
+
 
 
